@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h3>Seller Form</h3>
+        <form [formGroup]="sellerForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="sellerName" class="required-field">Seller Name</label>
+            <input type="text" class="form-control " id="sellerName" formControlName="sellerName" [ngClass]="{ 'is-invalid': submitted && f.sellerName.errors }">
+            <div *ngIf="submitted && f.sellerName.errors" class="invalid-feedback">
+              <div *ngIf="f.sellerName.errors.required">Seller Name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="currencies" class="required-field">Currencies</label>
+            <angular2-multiselect [data]="cursDropdownList" [(ngModel)]="cursSelectedItems"
+              [settings]="cursDropdownSettings" (onSelect)="cursOnItemSelect($event)"
+              (onDeSelect)="cursOnItemDeSelect($event)" (onSelectAll)="cursOnSelectAll($event)"
+              (onDeSelectAll)="cursOnDeSelectAll($event)" formControlName="currencies" [ngClass]="{ 'is-invalid': submitted && f.currencies.errors }"> 
+            </angular2-multiselect>
+            <div *ngIf="submitted && f.currencies.errors" class="invalid-feedback">
+              <div *ngIf="f.currencies.errors.required">Currencies is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="offices" class="required-field">Offices</label>
+            <angular2-multiselect [data]="ofcsDropdownList" [(ngModel)]="ofcsSelectedItems"
+              [settings]="ofcsDropdownSettings" (onSelect)="ofcsOnItemSelect($event)"
+              (onDeSelect)="ofcsOnItemDeSelect($event)" (onSelectAll)="ofcsOnSelectAll($event)"
+              (onDeSelectAll)="ofcsOnDeSelectAll($event)" formControlName="offices" [ngClass]="{ 'is-invalid': submitted && f.offices.errors }">
+            </angular2-multiselect>
+            <div *ngIf="submitted && f.offices.errors" class="invalid-feedback">
+              <div *ngIf="f.offices.errors.required">Offices is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sellerActDate" class="required-field">Seller Activation Date</label>
+            <!-- [value]='dateValue'> [max]='maxDate'-->
+            <ejs-datepicker id='datepicker' placeholder='Select a date' formControlName="sellerActDate"
+              format='yyyy-MM-dd' [min]='minDate' [ngClass]="{ 'is-invalid': submitted && f.sellerActDate.errors }"></ejs-datepicker>
+              <div *ngIf="submitted && f.sellerActDate.errors" class="invalid-feedback">
+                <div *ngIf="f.sellerActDate.errors.required">Seller Activation Date is required</div>
+              </div>
+          </div>
+          <div class="form-group">
+            <label class="required-field">Deal Type</label>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="bidded" formControlName="dealTypeBidded">
+              <label class="form-check-label" for="bidded">Bidded</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="guaranted" formControlName="dealTypeGuarnt">
+              <label class="form-check-label" for="guaranted">Guaranted</label>
+            </div>
+            <div *ngIf="submitted && (f.dealTypeBidded.errors ||f.dealTypeGuarnt.errors)" class="invalid-feedback">
+              <div *ngIf="f.offices.errors.required">Offices is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contactName">Contact Name</label>
+            <input type="text" class="form-control" id="contactName" formControlName="contactName">
+            <small class="form-text"></small>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="emailAdd" [ngClass]="{ 'is-invalid': submitted && f.emailAdd.errors }" >
+            <div *ngIf="submitted && f.emailAdd.errors" class="invalid-feedback">
+              <div *ngIf="f.emailAdd.errors.email">Email must be a valid email address</div>
+          </div>
+          </div>
+
+
+          <button type="button" class="btn btn-light" [routerLink]="['/sellerlist']">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
